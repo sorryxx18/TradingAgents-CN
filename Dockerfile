@@ -35,7 +35,7 @@ RUN echo '#!/bin/bash\nXvfb :99 -screen 0 1024x768x24 -ac +extension GLX &\nexpo
 
 COPY requirements.txt .
 
-#多源轮询安装依赖
+# 多源轮询安装依赖
 RUN set -e; \
     for src in \
         https://mirrors.aliyun.com/pypi/simple \
@@ -49,8 +49,10 @@ RUN set -e; \
 
 # 复制日志配置文件
 COPY config/ ./config/
-
 COPY . .
+
+# ✅ 加這行：讓容器能讀到你的 GOOGLE_API_KEY
+COPY .env /app/.env
 
 EXPOSE 8501
 
